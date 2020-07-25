@@ -26,26 +26,11 @@ const searchAxios = async (b64) => {
   return await res.data;
 };
 
-// ค้นหาด้วย fetch
-const searchFetch = async (b64) => {
-  const res = await fetch(url, {
-    method: "POST",
-
-    body: JSON.stringify({ image: b64 }),
-    headers: {
-      "Content-Type": "application/json",
-      Apikey: api_key,
-    },
-  });
-  return res.json();
-};
-
 // ประมวลผลการค้นหา
 const getResult = async (b64) => {
   resultText.innerText = "กำลังค้นหา....";
 
   const res = await searchAxios(b64);
-  // const res = await searchFetch(b64);
 
   if (res && res.boxes) {
     preview.src = drawResult(res.boxes);
