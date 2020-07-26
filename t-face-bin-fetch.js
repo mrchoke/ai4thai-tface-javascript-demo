@@ -50,8 +50,17 @@ const searchFetch = async () => {
     headers: {
       Apikey: api_key,
     },
+  }).catch((error) => {
+    result.innerHTML = error;
+    return {};
   });
-  return res.json();
+
+  if (res.ok) {
+    return res.json();
+  } else {
+    result.innerHTML = `Error: ${res.status} ${res.statusText}`;
+    return {};
+  }
 };
 
 // ประมวลผลการค้นหา
@@ -74,6 +83,7 @@ const getResult = async () => {
 
 // event on change เมื่อเลือกรูป
 img.onchange = () => {
+  result.innerHTML = "";
   const files = img.files[0] || img.files;
   loadImage.parseMetaData(files, (data) => {
     const options = {

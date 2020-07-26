@@ -13,16 +13,21 @@ const url = "https://api.aiforthai.in.th/t-face/base64/" + project_id;
 
 // ค้นหาด้วย axios
 const searchAxios = async (b64) => {
-  const res = await axios.post(
-    url,
-    { image: b64 },
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Apikey: api_key,
-      },
-    }
-  );
+  const res = await axios
+    .post(
+      url,
+      { image: b64 },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Apikey: api_key,
+        },
+      }
+    )
+    .catch((error) => {
+      result.innerHTML = error;
+      return {};
+    });
   return await res.data;
 };
 
@@ -47,6 +52,7 @@ const getResult = async (b64) => {
 
 // event on change เมื่อเลือกรูป
 img.onchange = () => {
+  result.innerHTML = "";
   const files = img.files[0] || img.files;
   loadImage.parseMetaData(files, (data) => {
     const options = {

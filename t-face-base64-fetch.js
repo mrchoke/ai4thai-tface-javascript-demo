@@ -20,8 +20,17 @@ const searchFetch = async (b64) => {
       "Content-Type": "application/json",
       Apikey: api_key,
     },
+  }).catch((error) => {
+    result.innerHTML = error;
+    return {};
   });
-  return res.json();
+
+  if (res.ok) {
+    return res.json();
+  } else {
+    result.innerHTML = `Error: ${res.status} ${res.statusText}`;
+    return {};
+  }
 };
 
 // ประมวลผลการค้นหา

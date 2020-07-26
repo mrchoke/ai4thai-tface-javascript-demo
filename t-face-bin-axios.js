@@ -41,12 +41,17 @@ const searchAxios = async () => {
   const formdata = new FormData();
   formdata.append("file", dataURItoBlob(orig_img));
 
-  const res = await axios.post(url, formdata, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Apikey: api_key,
-    },
-  });
+  const res = await axios
+    .post(url, formdata, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Apikey: api_key,
+      },
+    })
+    .catch((error) => {
+      result.innerHTML = error;
+      return {};
+    });
   return await res.data;
 };
 
@@ -71,6 +76,7 @@ const getResult = async () => {
 
 // event on change เมื่อเลือกรูป
 img.onchange = () => {
+  result.innerHTML = "";
   const files = img.files[0] || img.files;
   loadImage.parseMetaData(files, (data) => {
     const options = {
