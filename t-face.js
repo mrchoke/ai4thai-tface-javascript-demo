@@ -93,7 +93,7 @@ const showResult = (res, boxes) => {
       <div class="card h-100 text-center" style="border-color:${color(n)};">
     <img src="${cropFace(boxes[n])}" class="card-img-top img-thumbnail" >
       <div class="card-body">
-        <h5 class="card-title">หน้าที่ ${n + 1}</h5>
+        <h6 class="card-title">หน้าที่ ${n + 1}</h6>
       </div>
        </div>
        </div>`;
@@ -102,7 +102,7 @@ const showResult = (res, boxes) => {
       <div class="card h-100 text-center">
     <img src = "${img_url + i.image_path}" class="card-img-top img-thumbnail" >
       <div class="card-body">
-        <h5 class="card-title">${parseFloat(i.score * 100).toFixed(2)}</h5>
+        <h6 class="card-title">${parseFloat(i.score * 100).toFixed(2)}</h6>
       </div>
        </div>
        </div>`;
